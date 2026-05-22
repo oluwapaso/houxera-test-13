@@ -1,0 +1,138 @@
+"use client"
+
+import { LivingAreaFilters } from '@/_lib/data';
+import { RootState } from '@/app/GlobalRedux/store';
+import React, { useEffect, useRef, useState } from 'react';
+import { useSelector } from 'react-redux';
+import FloatingOptions from '../FloatingOptions';
+import { BsDash } from 'react-icons/bs';
+import { Helpers } from '@/_lib/helper';
+
+const helpers = new Helpers();
+const LivingAreaRangeDD = ({ props }: { props: any }) => {
+
+    const [isShown, setIsShown] = useState(false);
+    const boxRef = useRef<HTMLDivElement>(null);
+    const theme = useSelector((state: RootState) => state.theme);
+
+    const minAreaOptions = [{ name: 'No Minimum', code: '' }, ...LivingAreaFilters];
+    const maxAreaOptions = [{ name: 'No Maximum', code: '' }, ...LivingAreaFilters];
+
+    const handleAreaChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+        const name = e.target.name; // min_living_area | max_living_area
+        let value = e.target.value;
+        let compField = name === "min_living_area" ? "max_living_area" : "min_living_area";
+
+        let compVal = props.form_data[compField];
+
+        let thisIndex = LivingAreaFilters.findIndex(v => v.code === value);
+        let compIndex = LivingAreaFilters.findIndex(v => v.code === compVal);
+
+        // Enforce valid range
+        if (name === "min_living_area" && thisIndex >= compIndex && compIndex > -1) {
+            compVal = LivingAreaFilters[thisIndex + 1]?.code || value;
+        }
+
+        if (name === "max_living_area" && thisIndex <= compIndex && compIndex > -1) {
+            compVal = LivingAreaFilters[thisIndex - 1]?.code || '';
+        }
+
+        let rangeFrom = name === "min_living_area" ? value : compVal;
+        let rangeTo = name === "max_living_area" ? value : compVal;
+
+        const displayFrom = rangeFrom ? `${rangeFrom} sqm` : 'No Min.';
+        const displayTo = rangeTo ? `${rangeTo} sqm` : 'No Max.';
+
+        props.set_form_data((prev: any) => ({
+            ...prev,
+            [name]: value,
+            [compField]: compVal,
+            area_range: `${displayFrom} - ${displayTo}`,
+        }));
+    };
+
+    useEffect(() => {
+
+        if (!props.form_data.area_range || props.form_data.area_range == "") {
+
+            let range_from = props.form_data.min_living_area;
+            let range_to = props.form_data.max_living_area;
+
+            if (!range_from || range_from == "") {
+                range_from = "No Min.";
+            } else {
+                range_from = `${range_from} sqm`
+            }
+
+            if (!range_to || range_to == "") {
+                range_to = "No Max.";
+            } else {
+                range_to = `${range_to} sqm`
+            }
+
+            props.set_form_data((prev_val: any) => {
+                const prevVal = { ...prev_val }
+                return {
+                    ...prevVal,
+                    "area_range": `${range_from} - ${range_to}`,
+                }
+            });
+
+        }
+
+    }, [props.form_data.area_range]);
+
+    useEffect(() => {
+        const handleClickOutside = (e: MouseEvent) => {
+            if (boxRef.current && !boxRef.current.contains(e.target as Node)) {
+                setIsShown(false);
+            }
+        };
+        document.addEventListener("mousedown", handleClickOutside);
+        return () => document.removeEventListener("mousedown", handleClickOutside);
+    }, []);
+
+    return (
+        <div className="w-full relative flex flex-col h-12 cursor-pointer" ref={boxRef}>
+            <div className="flex items-center h-full" onClick={() => setIsShown(true)}>
+                {props.form_data.area_range
+                    ? <span className="font-medium text-gray-500">
+                        {props.form_data.area_range}
+                    </span>
+                    : <span className="text-gray-400 italic">
+                        -- select living area --
+                    </span>
+                }
+            </div>
+
+            {isShown && (
+                <div className="w-[400px] absolute top-[101%] right-0 z-20
+                    bg-white border border-gray-300 shadow-2xl rounded-md
+                    grid grid-cols-[1fr_30px_1fr] p-4 items-center">
+
+                    <FloatingOptions
+                        name="min_living_area"
+                        label="Min Liv. Area"
+                        value={props.form_data.min_living_area}
+                        options={minAreaOptions}
+                        handleSelectChange={handleAreaChange}
+                    />
+
+                    <div className="flex justify-center">
+                        <BsDash size={25} />
+                    </div>
+
+                    <FloatingOptions
+                        name="max_living_area"
+                        label="Max Liv. Area"
+                        value={props.form_data.max_living_area}
+                        options={maxAreaOptions}
+                        handleSelectChange={handleAreaChange}
+                    />
+                </div>
+            )}
+        </div>
+    );
+};
+
+export default LivingAreaRangeDD;

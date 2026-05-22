@@ -1,0 +1,329 @@
+@import url("https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,100..900;1,100..900&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Michroma&display=swap');
+
+@import "tailwindcss";
+@source "./safelist.txt";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@layer base {
+/* 
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
+
+  * {
+    margin: 0;
+    padding: 0;
+  } */
+
+  /* Title.css */
+  @keyframes slideFadeIn {
+    0% {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .title-animate {
+    animation: slideFadeIn 0.8s ease-out forwards;
+  }
+
+  /* Title.css */
+  @keyframes xoomFadeIn {
+    0% {
+      transform: scale(0.8);
+      opacity: 0;
+    }
+
+    100% {
+      transform: scale(1);
+      opacity: 1;
+    }
+  }
+
+  .xoom-in-animate {
+    animation: xoomFadeIn 0.8s ease-out forwards;
+  }
+
+  /* WavingHand.css */
+  @keyframes wave {
+    0% {
+      transform: rotate(0deg);
+    }
+
+    10% {
+      transform: rotate(14deg);
+    }
+
+    20% {
+      transform: rotate(-8deg);
+    }
+
+    30% {
+      transform: rotate(14deg);
+    }
+
+    40% {
+      transform: rotate(-4deg);
+    }
+
+    50% {
+      transform: rotate(10deg);
+    }
+
+    60%,
+    100% {
+      transform: rotate(0deg);
+    }
+  }
+
+  .waving-hand {
+    display: inline-block;
+    animation: wave 2s infinite;
+    transform-origin: 70% 70%;
+  }
+
+
+  /* HoverSlide.css */
+  .hover-slide {
+    position: relative;
+    overflow: hidden;
+    display: inline-flex;
+    align-items: center;  
+    transition: color 0.3s ease;
+    z-index: 0;
+  }
+
+  .hover-slide::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 0%;
+    height: 100%;
+    background-color: #f59e0b;
+    /* amber-500 */
+    z-index: -1;
+    transition: width 0.3s ease;
+  }
+
+  .hover-slide:hover::before {
+    width: 100%;
+  }
+
+  .hover-slide:hover {
+    color: white;
+  } 
+
+} 
+
+@layer utilities {
+  
+  .text-auto-contrast{
+    color: #0a0a0a; /** fallack **/
+    /* color: oklch(from var(--tw-bg) clamp(0.03, calc(1.4 - 1), 0.97) 0 0); */
+    color: oklch(0.97 0 0);
+  }
+
+  /* global.css or your Tailwind input CSS */
+  .line-clamp-2 {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    overflow: hidden;
+  }
+
+  /* optionally make a generic utility */
+  .line-clamp {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .line-clamp-2 {
+    -webkit-line-clamp: 2;
+  }
+
+  .line-clamp-3 {
+    -webkit-line-clamp: 3;
+  }
+
+    .styled-checkbox {
+      position: relative;
+      opacity: 0;
+      cursor: pointer;
+    }
+  
+    .styled-checkbox.fomik-checkbox {
+      left: 1.5px;
+      z-index: 10;
+    }
+  
+    .styled-checkbox+label {
+      position: relative;
+      cursor: pointer;
+      padding: 0;
+    }
+  
+    .styled-checkbox.fomik-checkbox+label {
+      left: -15px;
+    }
+  
+    .styled-checkbox+label:before {
+      content: "";
+      margin-right: 10px;
+      display: inline-block;
+      vertical-align: text-top;
+      min-width: 20px;
+      width: 20px;
+      height: 20px;
+      background: white;
+      border: 2px solid rgba(0, 0, 0, 0.12);
+      margin-top: 2px;
+    }
+  
+    .styled-checkbox:hover+label:before {
+      @apply bg-red-400;
+    }
+  
+    .styled-checkbox:focus+label:before {
+      box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.12);
+    }
+  
+    .styled-checkbox:checked+label:before {
+      @apply bg-red-500;
+    }
+  
+    .styled-checkbox:disabled+label {
+      color: #b8b8b8;
+      cursor: auto;
+    }
+  
+    .styled-checkbox:disabled+label:before {
+      box-shadow: none;
+      background: #ddd;
+    }
+  
+    .styled-checkbox:checked+label:after {
+      content: "";
+      position: absolute;
+      left: 5px;
+      top: 11px;
+      background: white;
+      width: 2px;
+      height: 2px;
+      box-shadow: 2px 0 0 white, 4px 0 0 white, 4px -2px 0 white, 4px -4px 0 white,
+        4px -6px 0 white, 4px -8px 0 white;
+      transform: rotate(45deg);
+    }
+    
+}
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+@theme {
+
+  /* override default fonts */
+  --font-*: initial;
+  --font-sans: "Poppins", "sans-serif";
+
+  --font-poppins: "Poppins", "sans-serif";
+  --font-nunito: "Nunito Sans", "sans-serif";
+  --font-jost: "Jost", "sans-serif";
+  --font-michroma: "Michroma", "sans-serif";
+
+  --breakpoint-3xl: 1920px;
+  --breakpoint-2xs: 420px;
+  --breakpoint-xs: 540px;
+  --breakpoint-tab: 960px;
+  --breakpoint-lgScrn: 1450px;
+
+  --color-primary: #1f2937;
+  --color-primary-lighter: #4b5563;
+  --color-primary-light: #374151;
+  --color-primary-dark: #1f2937;
+  --color-primary-darker: #111827;
+  
+  --color-secondary: #00a63e;
+
+  --color-icons-primary: #00a63e;
+  --color-icons-primary-darker: #008236;
+
+  --color-dark-main: #0a1930;
+  --color-dark-card: #172b46;
+  --color-dark-light: #213756;
+  --color-dark-text: #d1d5db;
+  --color-dark-darker: #051227;
+
+  --color-buttons-primary: #00a63e;
+  --color-buttons-secondary: #7bf1a8;
+  
+  --color-primary-bg: #ededed;
+  --color-footer-primary-bg: #202942;
+  --color-footer-secondary-bg: #283353;
+
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+}
+
+/* Safelist: All base colors + shades for bg, text, border, ring, outline */
+/* Base colors - split by property or color groups */
+@source inline("{bg-,text-}{red,orange,amber,yellow,lime,green}-{50,100,200,300,400,500,600,700,800,900,950}");
+ 
+@source inline("{bg-,text-}{red,orange,amber,yellow,lime,green}-{50,100,200,300,400,500,600,700,800,900,950}/{0,10,20,25,30,40,50,60,70,75,80,90,95,100}");
+@source inline("hover:{bg-,text-}{red,orange,amber,yellow,lime,green}-{50,100,200,300,400,500,600,700,800,900,950}");
+
+@source inline("{bg-,text-}{emerald,teal,cyan,sky,blue,indigo}-{50,100,200,300,400,500,600,700,800,900,950}");
+
+@source inline("{bg-,text-}{emerald,teal,cyan,sky,blue,indigo}-{50,100,200,300,400,500,600,700,800,900,950}/{0,10,20,25,30,40,50,60,70,75,80,90,95,100}");
+@source inline("hover:{bg-,text-}{emerald,teal,cyan,sky,blue,indigo}-{50,100,200,300,400,500,600,700,800,900,950}");
+@source inline("{bg-,text-}{violet,purple,fuchsia,pink,rose,slate,gray,zinc}-{50,100,200,300,400,500,600,700,800,900,950}");
+
+@source inline("{bg-,text-}{violet,purple,fuchsia,pink,rose,slate,gray,zinc}-{50,100,200,300,400,500,600,700,800,900,950}/{0,10,20,25,30,40,50,60,70,75,80,90,95,100}");
+@source inline("hover:{bg-,text-}{violet,purple,fuchsia,pink,rose,slate,gray,zinc}-{50,100,200,300,400,500,600,700,800,900,950}");
+
+/* Base Border Utilities (All Directions) */
+@source inline("{border-,border-t-,border-b-,border-l-,border-r-,border-x-,border-y-,ring-,outline-}{red,orange,amber,yellow,lime,green,emerald,teal,cyan,sky,blue,indigo,violet,purple,fuchsia,pink,rose,slate,gray,zinc}-{50,100,200,300,400,500,600,700,800,900,950}");
+
+/* Hover */
+@source inline("hover:{border-,border-t-,border-b-,border-l-,border-r-,border-x-,border-y-,ring-,outline-}{red,orange,amber,yellow,lime,green,emerald,teal,cyan,sky,blue,indigo,violet,purple,fuchsia,pink,rose,slate,gray,zinc}-{50,100,200,300,400,500,600,700,800,900,950}");
+/* Border Opacity Support - Split to avoid build issues */
+
+@source inline("{border-,border-t-,border-b-,border-l-,border-r-,border-x-,border-y-}{red,orange,amber,yellow,lime,green,emerald,teal,cyan,sky,blue,indigo,violet,purple,fuchsia,pink,rose,slate,gray,zinc}-{50,100,200,300,400,500,600,700,800,900,950}/50");
+@source inline("{border-,border-t-,border-b-,border-l-,border-r-,border-x-,border-y-}{red,orange,amber,yellow,lime,green,emerald,teal,cyan,sky,blue,indigo,violet,purple,fuchsia,pink,rose,slate,gray,zinc}-{50,100,200,300,400,500,600,700,800,900,950}/75");
+@source inline("{border-,border-t-,border-b-,border-l-,border-r-,border-x-,border-y-}{red,orange,amber,yellow,lime,green,emerald,teal,cyan,sky,blue,indigo,violet,purple,fuchsia,pink,rose,slate,gray,zinc}-{400,500,600,700}/0");
+@source inline("{border-,border-t-,border-b-,border-l-,border-r-,border-x-,border-y-}{red,orange,amber,yellow,lime,green,emerald,teal,cyan,sky,blue,indigo,violet,purple,fuchsia,pink,rose,slate,gray,zinc}-{400,500,600,700}/25");
+@source inline("{border-,border-t-,border-b-,border-l-,border-r-,border-x-,border-y-}{red,orange,amber,yellow,lime,green,emerald,teal,cyan,sky,blue,indigo,violet,purple,fuchsia,pink,rose,slate,gray,zinc}-{400,500,600,700}/100");
+
+body {
+  background: #ffffff;
+  padding: 0px;
+  margin: 0px;
+  color: var(--color-primary);
+  font-family: "Poppins", "Nunito Sans", sans-serif;
+}
+
