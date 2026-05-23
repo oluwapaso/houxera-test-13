@@ -26,8 +26,8 @@
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx",
-    ".next/types/**/*.ts",
-    "app/homely/(main)/privacy-policy"
+    ".next/types/**/*.ts", 
+    "**/*.d.ts"
   ],
   "exclude": ["node_modules"]
 }

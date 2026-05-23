@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Script from "next/script";
-import "../../globals.css";
-import { Providers } from "@/app/GlobalRedux/providers";
+import "@/globals.css";
+import { Providers } from "@/GlobalRedux/providers";
 import ThemeSettings from "@/components/ThemeSettings";
 import PageLoaderMain from "@/components/PageLoaderMain";
 import { ToastContainer } from "react-toastify";
