@@ -1,14 +1,15 @@
+@import "tailwindcss";
+
 @import url("https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,100..900;1,100..900&display=swap");
 @import url('https://fonts.googleapis.com/css2?family=Michroma&display=swap');
 
-@import "tailwindcss";
-@source "./safelist.txt";
+/* @source "./safelist.txt"; */
 
 @custom-variant dark (&:where(.dark, .dark *));
 
 @layer base {
-/* 
+  /* 
   *,
   *::before,
   *::after {
@@ -98,7 +99,7 @@
     position: relative;
     overflow: hidden;
     display: inline-flex;
-    align-items: center;  
+    align-items: center;
     transition: color 0.3s ease;
     z-index: 0;
   }
@@ -122,14 +123,15 @@
 
   .hover-slide:hover {
     color: white;
-  } 
+  }
 
-} 
+}
 
 @layer utilities {
-  
-  .text-auto-contrast{
-    color: #0a0a0a; /** fallack **/
+
+  .text-auto-contrast {
+    color: #0a0a0a;
+    /** fallack **/
     /* color: oklch(from var(--tw-bg) clamp(0.03, calc(1.4 - 1), 0.97) 0 0); */
     color: oklch(0.97 0 0);
   }
@@ -157,75 +159,75 @@
     -webkit-line-clamp: 3;
   }
 
-    .styled-checkbox {
-      position: relative;
-      opacity: 0;
-      cursor: pointer;
-    }
-  
-    .styled-checkbox.fomik-checkbox {
-      left: 1.5px;
-      z-index: 10;
-    }
-  
-    .styled-checkbox+label {
-      position: relative;
-      cursor: pointer;
-      padding: 0;
-    }
-  
-    .styled-checkbox.fomik-checkbox+label {
-      left: -15px;
-    }
-  
-    .styled-checkbox+label:before {
-      content: "";
-      margin-right: 10px;
-      display: inline-block;
-      vertical-align: text-top;
-      min-width: 20px;
-      width: 20px;
-      height: 20px;
-      background: white;
-      border: 2px solid rgba(0, 0, 0, 0.12);
-      margin-top: 2px;
-    }
-  
-    .styled-checkbox:hover+label:before {
-      @apply bg-red-400;
-    }
-  
-    .styled-checkbox:focus+label:before {
-      box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.12);
-    }
-  
-    .styled-checkbox:checked+label:before {
-      @apply bg-red-500;
-    }
-  
-    .styled-checkbox:disabled+label {
-      color: #b8b8b8;
-      cursor: auto;
-    }
-  
-    .styled-checkbox:disabled+label:before {
-      box-shadow: none;
-      background: #ddd;
-    }
-  
-    .styled-checkbox:checked+label:after {
-      content: "";
-      position: absolute;
-      left: 5px;
-      top: 11px;
-      background: white;
-      width: 2px;
-      height: 2px;
-      box-shadow: 2px 0 0 white, 4px 0 0 white, 4px -2px 0 white, 4px -4px 0 white,
-        4px -6px 0 white, 4px -8px 0 white;
-      transform: rotate(45deg);
-    }
-    
+  .styled-checkbox {
+    position: relative;
+    opacity: 0;
+    cursor: pointer;
+  }
+
+  .styled-checkbox.fomik-checkbox {
+    left: 1.5px;
+    z-index: 10;
+  }
+
+  .styled-checkbox+label {
+    position: relative;
+    cursor: pointer;
+    padding: 0;
+  }
+
+  .styled-checkbox.fomik-checkbox+label {
+    left: -15px;
+  }
+
+  .styled-checkbox+label:before {
+    content: "";
+    margin-right: 10px;
+    display: inline-block;
+    vertical-align: text-top;
+    min-width: 20px;
+    width: 20px;
+    height: 20px;
+    background: white;
+    border: 2px solid rgba(0, 0, 0, 0.12);
+    margin-top: 2px;
+  }
+
+  .styled-checkbox:hover+label:before {
+    @apply bg-red-400;
+  }
+
+  .styled-checkbox:focus+label:before {
+    box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.12);
+  }
+
+  .styled-checkbox:checked+label:before {
+    @apply bg-red-500;
+  }
+
+  .styled-checkbox:disabled+label {
+    color: #b8b8b8;
+    cursor: auto;
+  }
+
+  .styled-checkbox:disabled+label:before {
+    box-shadow: none;
+    background: #ddd;
+  }
+
+  .styled-checkbox:checked+label:after {
+    content: "";
+    position: absolute;
+    left: 5px;
+    top: 11px;
+    background: white;
+    width: 2px;
+    height: 2px;
+    box-shadow: 2px 0 0 white, 4px 0 0 white, 4px -2px 0 white, 4px -4px 0 white,
+      4px -6px 0 white, 4px -8px 0 white;
+    transform: rotate(45deg);
+  }
+
 }
 
 :root {
@@ -262,7 +264,7 @@
   --color-primary-light: #374151;
   --color-primary-dark: #1f2937;
   --color-primary-darker: #111827;
-  
+
   --color-secondary: #00a63e;
 
   --color-icons-primary: #00a63e;
@@ -276,7 +278,7 @@
 
   --color-buttons-primary: #00a63e;
   --color-buttons-secondary: #7bf1a8;
-  
+
   --color-primary-bg: #ededed;
   --color-footer-primary-bg: #202942;
   --color-footer-secondary-bg: #283353;
@@ -293,7 +295,7 @@
 /* Safelist: All base colors + shades for bg, text, border, ring, outline */
 /* Base colors - split by property or color groups */
 @source inline("{bg-,text-}{red,orange,amber,yellow,lime,green}-{50,100,200,300,400,500,600,700,800,900,950}");
- 
+
 @source inline("{bg-,text-}{red,orange,amber,yellow,lime,green}-{50,100,200,300,400,500,600,700,800,900,950}/{0,10,20,25,30,40,50,60,70,75,80,90,95,100}");
 @source inline("hover:{bg-,text-}{red,orange,amber,yellow,lime,green}-{50,100,200,300,400,500,600,700,800,900,950}");
 
@@ -326,4 +328,3 @@ body {
   color: var(--color-primary);
   font-family: "Poppins", "Nunito Sans", sans-serif;
 }
-
