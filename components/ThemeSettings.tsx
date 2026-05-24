@@ -46,6 +46,7 @@ const ThemeSettings = ({ theme_name }: { theme_name: string }) => {
         // }
 
         var default_settings = {
+            "is_default": "Yes",
             "bg_solid_primary_color": "bg-green-600",
             "blog_card": "BlogCard-1",
             "footer_component": "Footer-1",
