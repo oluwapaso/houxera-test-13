@@ -149,7 +149,20 @@
 		const pageData = {
         "isHome": false,
         "metaDescription": "",
-        "sections": [],
+        "sections": [
+            {
+                "props": {
+                    "button_text": "Send Us Message",
+                    "category": "contact_us_form",
+                    "component": "ContactUsFormVar2",
+                    "header": "Want To Talk",
+                    "name": "Contact Us Form",
+                    "sub_header": "It's all about the humans behind a brand and those experiencing it, we're right there. In the middle.",
+                    "type": "section"
+                },
+                "type": "ContactUsFormVar2"
+            }
+        ],
         "slug": "/contact-us",
         "title": "Contact Us",
         "uid": "contact-us-001"
