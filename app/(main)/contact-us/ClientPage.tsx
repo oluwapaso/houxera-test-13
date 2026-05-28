@@ -48,7 +48,7 @@
 				)}
 
 				<main className="flex-1 w-full">
-					<PageRenderer data={pageData} />
+					<PageRenderer data={pageData} is_theme={false}  />
 				</main>
 
 				{/* Dynamic Footer */}
